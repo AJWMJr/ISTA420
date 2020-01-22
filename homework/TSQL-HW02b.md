@@ -16,7 +16,7 @@
 
 7. from highest to lowest: !, &&, ||
 
-8. From highest to lowest: ++/--, +/-, (*,/,&)* 
+8. From highest to lowest: ++/--, +/-, (multiplication,/,&)
 
 9. simple CASE evaluate a single expression against values while a searched CASE evaluates multiple booleans
 
