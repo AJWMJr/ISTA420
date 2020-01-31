@@ -8,7 +8,7 @@
 
 3. By using both the LTRIM and RTRIM functions
 
-4. SELECT collegename FROM college WHERE collegename LIKE N'%university%';
+4. SELECT collegename FROM colleges WHERE collegename LIKE '%institute%';
 
 5. SELECT PATINDEX('% %', 'string with spaces');
 
@@ -20,6 +20,6 @@
 
 9. simple CASE evaluate a single expression against values while a searched CASE evaluates multiple booleans
 
-10. concatenate the strings with an expression like: SELECT firstname + N' ' + lastname AS fullname From HR.employees;
+10. concatenate the strings with an expression like: SELECT firstname + ' ' + lastname AS fullname From HR.employees;
 
-11. You would split and then re-merge the strings with an expression like: SELECT SUBSTRING(fullname, 1, CHARINDEX(' ', fullname) - 1) AS firstname, SUBSTRING(fullname, CHARINDEX(' ', fullname) + 1, 8000) AS lastname, SUBSTRING (firstname +N' ' + lastname) AS fullnamereversed from employees;
+11. You would split and then re-merge the strings with an expression like: SELECT SUBSTRING(fullname, 1, CHARINDEX(' ', fullname) - 1) AS firstname, SUBSTRING(fullname, CHARINDEX(' ', fullname) + 1, 8000) AS lastname, SUBSTRING (firstname + ' ' + lastname) AS fullnamereversed from employees;
