@@ -3,7 +3,7 @@ use TSQLV4;
 drop table if exists dbo.Presidents;
 create table dbo.Presidents
 (
-	ID varchar(50) not null Primary Key,
+	ID varchar(50) not null,
 	LastName varchar(50) not null,
 	FirstName varchar(50) not null,
 	MiddleName varchar(50),
@@ -39,10 +39,11 @@ output deleted.id, deleted.LastName, deleted.FirstName, deleted.MiddleName, dele
 	deleted.Assassinated, deleted.ReligiousAffiliation
 where ID = 'ID';
 
-drop sequence if exists dbo.Altr;
-create sequence dbo.Altr as int
-minvalue 1
-maxvalue 44;
-declare @index as int = next value for dbo.Altr;
+Alter table dbo.Presidents
+alter column ID int not null;
+Alter table dbo.Presidents add newColumn int not null identity
+constraint newCon check(newColumn > 0 and newColumn < 45)
+Alter table dbo.Presidents
+add constraint PK_pres primary key(newColumn);
 
-select * from dbo.Presidents;
+select * from dbo.Presidents order by ID asc;
