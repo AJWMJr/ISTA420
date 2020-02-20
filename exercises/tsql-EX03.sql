@@ -42,8 +42,26 @@ where ID = 'ID';
 Alter table dbo.Presidents
 alter column ID int not null;
 Alter table dbo.Presidents add newColumn int not null identity
-constraint newCon check(newColumn > 0 and newColumn < 45)
+constraint newCon check(newColumn > 0 and newColumn < 46)
 Alter table dbo.Presidents
 add constraint PK_pres primary key(newColumn);
 
-select * from dbo.Presidents order by ID asc;
+update dbo.Presidents
+set DateLeftOffice = '1/20/2017', AssassinationAttempt = 'false', Assassinated = 'false'
+where LastName = 'Obama';
+
+insert into dbo.Presidents (id, LastName, FirstName, MiddleName, OrderOfPresidency,
+	DateOfBirth, DateOfDeath, TownOfBirth, StateOfBirth, HomeState,
+	PartyAffiliation, DateTookOffice, DateLeftOffice, AssassinationAttempt,
+	Assassinated, ReligiousAffiliation)
+output inserted.id, inserted.LastName, inserted.FirstName, inserted.MiddleName, inserted.OrderOfPresidency,
+	inserted.DateOfBirth, inserted.DateOfDeath, inserted.TownOfBirth, inserted.StateOfBirth, inserted.HomeState,
+	inserted.PartyAffiliation, inserted.DateTookOffice, inserted.DateLeftOffice, inserted.AssassinationAttempt,
+	inserted.Assassinated, inserted.ReligiousAffiliation
+values (45, 'Trump', 'Donald', 'John', '45', '6/14/1946', null, 'New York', 'New York', 'New York', 'Republican', '1/20/2017', null, 'false', 'false', 'Presbyterian');
+
+select HomeState, PartyAffiliation, count(ID) as 'Number of Presidents'
+from dbo.Presidents
+group by PartyAffiliation, HomeState
+order by HomeState;
+select * from dbo.Presidents order by HomeState asc;
