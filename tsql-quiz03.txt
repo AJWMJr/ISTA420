@@ -1,0 +1,76 @@
+.headers on
+-- Name: AJ McCray
+-- File: tsql-quiz03
+-- Date: February 4, 2020
+
+/* 1. Write a report giving the employee id, first name, last name, and the average amount of all orders by
+that employee. */
+select o.EmployeeID, FirstName || ' ' || LastName as Employee, avg(unitprice * Quantity) as AverageOrders
+from Orders o
+join Employees e
+on o.employeeid = e.employeeid
+join order_details od
+on o.orderid = od.orderid
+group by o.EmployeeID, FirstName, LastName;
+EmployeeID|Employee|AverageOrders
+1|Nancy Davolio|585.923797101449
+2|Andrew Fuller|737.548796680498
+3|Janet Leverling|663.711214953271
+4|Margaret Peacock|595.684404761905
+5|Steven Buchanan|645.878205128205
+6|Michael Suyama|465.464880952381
+7|Robert King|802.818125
+8|Laura Callahan|512.696269230769
+9|Anne Dodsworth|775.364485981308
+
+/* 2. Write a report that lists our product categories and the average price of all products of that category.
+Include the category id, the category name, and the average price. */
+select c.CategoryID, categoryname, avg(unitprice) as AveragePrice
+from categories c
+join products p
+on c.CategoryID = p.CategoryID
+group by c.CategoryID, c.CategoryName;
+CategoryID|CategoryName|AveragePrice
+1|Beverages|37.9791666666667
+2|Condiments|23.0625
+3|Confections|25.16
+4|Dairy Products|28.73
+5|Grains/Cereals|20.25
+6|Meat/Poultry|54.0066666666667
+7|Produce|32.37
+8|Seafood|20.6825
+
+/* 3. In some cities, we have customers, suppliers, and employees. Write a report that lists the customer’s
+contact name, the supplier’s contact name, the employee’s name, and the city in which all three are
+located. */
+select c.contactname as 'Customer Contact', s.contactname as 'Supplier Contact', firstname || ' ' || lastname as Employee, c.city
+from Customers c
+join Employees e
+on c.city = e.city
+join Suppliers s
+on s.city = c.city;
+Customer Contact|Supplier Contact|Employee|City
+Thomas Hardy|Charlotte Cooper|Steven Buchanan|London
+Thomas Hardy|Charlotte Cooper|Anne Dodsworth|London
+Thomas Hardy|Charlotte Cooper|Robert King|London
+Thomas Hardy|Charlotte Cooper|Michael Suyama|London
+Victoria Ashworth|Charlotte Cooper|Steven Buchanan|London
+Victoria Ashworth|Charlotte Cooper|Anne Dodsworth|London
+Victoria Ashworth|Charlotte Cooper|Robert King|London
+Victoria Ashworth|Charlotte Cooper|Michael Suyama|London
+Elizabeth Brown|Charlotte Cooper|Steven Buchanan|London
+Elizabeth Brown|Charlotte Cooper|Anne Dodsworth|London
+Elizabeth Brown|Charlotte Cooper|Robert King|London
+Elizabeth Brown|Charlotte Cooper|Michael Suyama|London
+Ann Devon|Charlotte Cooper|Steven Buchanan|London
+Ann Devon|Charlotte Cooper|Anne Dodsworth|London
+Ann Devon|Charlotte Cooper|Robert King|London
+Ann Devon|Charlotte Cooper|Michael Suyama|London
+Simon Crowther|Charlotte Cooper|Steven Buchanan|London
+Simon Crowther|Charlotte Cooper|Anne Dodsworth|London
+Simon Crowther|Charlotte Cooper|Robert King|London
+Simon Crowther|Charlotte Cooper|Michael Suyama|London
+Hari Kumar|Charlotte Cooper|Steven Buchanan|London
+Hari Kumar|Charlotte Cooper|Anne Dodsworth|London
+Hari Kumar|Charlotte Cooper|Robert King|London
+Hari Kumar|Charlotte Cooper|Michael Suyama|London
